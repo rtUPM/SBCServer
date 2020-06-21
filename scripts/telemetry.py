@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt
 import json
 import subprocess
 
-SERVER = '172.16.54.14'
+SERVER = '127.0.0.1'
 ACCESS_TOKEN = 'oCmxatX57uLvSRbNhTCd'
 # USER="pi"
 
