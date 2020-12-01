@@ -101,7 +101,7 @@ class Monitor(tk.Frame):
 
         # Init Config Data
         self.config = configparser.ConfigParser()
-        self.config.read('sensor.ini')
+        self.config.read('server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
 
@@ -275,7 +275,7 @@ class Monitor(tk.Frame):
         self.humidifier_label.config(image=self.controller.empty_image)
 
     def get_config_data(self):
-        self.config.read('sensor.ini')
+        self.config.read('server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
         self.temperature_config_text.set(str(self.config_temperature) + "ºc")
@@ -290,7 +290,7 @@ class Settings(tk.Frame):
 
         # Init Config Data
         self.config = configparser.ConfigParser()
-        self.config.read('sensor.ini')
+        self.config.read('server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
         self.temperature = self.config_temperature
@@ -438,18 +438,18 @@ class Settings(tk.Frame):
             self.humidity_text.set(str(self.humidity))
 
     def get_config_data(self):
-        self.config.read('sensor.ini')
+        self.config.read('server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
         self.temperature = self.config_temperature
         self.humidity = self.config_humidity
 
     def set_config_data(self):
-        self.config.read('sensor.ini')
+        self.config.read('server.conf')
         self.config.set('sensor', 'temperature', str(self.temperature))
         self.config.set('sensor', 'humidity', str(self.humidity))
 
-        with open('sensor.ini', 'w') as configfile:  # save
+        with open('server.conf', 'w') as configfile:  # save
             self.config.write(configfile)
 
         self.get_config_data()
