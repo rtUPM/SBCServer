@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SBCServerIP=172.16.54.14
-SBCSensorIP=172.16.54.15
+SBCServerIP=
+SBCSensorIP=
 DIR=/home/pi/
 
 #Install packages
