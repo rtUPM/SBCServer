@@ -7,7 +7,7 @@ import json
 import subprocess
 
 SERVER = '127.0.0.1'
-ACCESS_TOKEN = 'oCmxatX57uLvSRbNhTCd'
+ACCESS_TOKEN = 'acces_token'
 # USER="pi"
 
 sensor_data = {'temperature': 0, 'humidity': 0, 'heater': 0, 'humidifier': 0}
