@@ -21,20 +21,20 @@ class Main(tk.Tk):
         self.config(cursor="none")
 
         # Images
-        self.thermometer_image = ImageTk.PhotoImage(Image.open("img/thermometer2.png"))
-        self.flame_image = ImageTk.PhotoImage(Image.open("img/flame.png"))
-        self.cold_image = ImageTk.PhotoImage(Image.open("img/cold.png"))
-        self.humidity_image = ImageTk.PhotoImage(Image.open("img/humidity3.png"))
-        self.humidifier_image = ImageTk.PhotoImage(Image.open("img/humidifier.png"))
-        self.settings_image = ImageTk.PhotoImage(Image.open("img/settings.png"))
-        self.up_image = ImageTk.PhotoImage(Image.open("img/up.png"))
-        self.down_image = ImageTk.PhotoImage(Image.open("img/down.png"))
-        self.accept_image = ImageTk.PhotoImage(Image.open("img/accept.png"))
-        self.back_image = ImageTk.PhotoImage(Image.open("img/back.png"))
-        self.empty_image = ImageTk.PhotoImage(Image.open("img/empty.png"))
-        self.exit_image = ImageTk.PhotoImage(Image.open("img/exit.png"))
-        self.logo_image = ImageTk.PhotoImage(Image.open("img/logo.png"))
-        self.off_image = ImageTk.PhotoImage(Image.open("img/off.png"))
+        self.thermometer_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/thermometer.png"))
+        self.flame_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/flame.png"))
+        self.cold_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/cold.png"))
+        self.humidity_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/humidity.png"))
+        self.humidifier_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/humidifier.png"))
+        self.settings_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/settings.png"))
+        self.up_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/up.png"))
+        self.down_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/down.png"))
+        self.accept_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/accept.png"))
+        self.back_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/back.png"))
+        self.empty_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/empty.png"))
+        self.exit_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/exit.png"))
+        self.logo_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/logo.png"))
+        self.off_image = ImageTk.PhotoImage(Image.open("/home/pi/SBCServer/img/off.png"))
 
         # Actuators state
         self.actuators_state = True
@@ -67,16 +67,16 @@ class Main(tk.Tk):
         threading.Thread(target=self.set_humidifier_off).start()
 
     def set_humidifier_on(self):
-        subprocess.run(['./scripts/setHumidifierOn.sh'])
+        subprocess.run(['/home/pi/SBCServer/scripts/setHumidifierOn.sh'])
 
     def set_humidifier_off(self):
-        subprocess.run(['./scripts/setHumidifierOff.sh'])
+        subprocess.run(['/home/pi/SBCServer/scripts/setHumidifierOff.sh'])
 
     def set_heater_off(self):
-        subprocess.run(['./scripts/setHeaterOff.sh'])
+        subprocess.run(['/home/pi/SBCServer/scripts/setHeaterOff.sh'])
 
     def set_heater_on(self):
-        subprocess.run(['./scripts/setHeaterOn.sh'])
+        subprocess.run(['/home/pi/SBCServer/scripts/setHeaterOn.sh'])
 
     def get_actuators_state(self):
         return self.actuators_state
@@ -101,7 +101,7 @@ class Monitor(tk.Frame):
 
         # Init Config Data
         self.config = configparser.ConfigParser()
-        self.config.read('server.conf')
+        self.config.read('/home/pi/SBCServer/server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
 
@@ -209,7 +209,7 @@ class Monitor(tk.Frame):
         self.after(1000, self.update_date)
 
     def get_temperature(self):
-        self.temperature = subprocess.run(['./scripts/getTemperature.sh'], stdout=subprocess.PIPE).stdout.decode().rstrip()
+        self.temperature = subprocess.run(['/home/pi/SBCServer/scripts/getTemperature.sh'], stdout=subprocess.PIPE).stdout.decode().rstrip()
 
     def update_temperature(self):
         if self.controller.actuators_state:
@@ -236,7 +236,7 @@ class Monitor(tk.Frame):
         self.time_label.after(5000, self.update_temperature)
 
     def get_humidity(self):
-        self.humidity = subprocess.run(['./scripts/getHumidity.sh'], stdout=subprocess.PIPE).stdout.decode().rstrip()
+        self.humidity = subprocess.run(['/home/pi/SBCServer/scripts/getHumidity.sh'], stdout=subprocess.PIPE).stdout.decode().rstrip()
 
     def update_humidity(self):
         if self.controller.actuators_state:
@@ -275,7 +275,7 @@ class Monitor(tk.Frame):
         self.humidifier_label.config(image=self.controller.empty_image)
 
     def get_config_data(self):
-        self.config.read('server.conf')
+        self.config.read('/home/pi/SBCServer/server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
         self.temperature_config_text.set(str(self.config_temperature) + "ºc")
@@ -290,7 +290,7 @@ class Settings(tk.Frame):
 
         # Init Config Data
         self.config = configparser.ConfigParser()
-        self.config.read('server.conf')
+        self.config.read('/home/pi/SBCServer/server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
         self.temperature = self.config_temperature
@@ -438,18 +438,18 @@ class Settings(tk.Frame):
             self.humidity_text.set(str(self.humidity))
 
     def get_config_data(self):
-        self.config.read('server.conf')
+        self.config.read('/home/pi/SBCServer/server.conf')
         self.config_temperature = float(self.config.get('sensor', 'temperature'))
         self.config_humidity = float(self.config.get('sensor', 'humidity'))
         self.temperature = self.config_temperature
         self.humidity = self.config_humidity
 
     def set_config_data(self):
-        self.config.read('server.conf')
+        self.config.read('/home/pi/SBCServer/server.conf')
         self.config.set('sensor', 'temperature', str(self.temperature))
         self.config.set('sensor', 'humidity', str(self.humidity))
 
-        with open('server.conf', 'w') as configfile:  # save
+        with open('/home/pi/SBCServer/server.conf', 'w') as configfile:  # save
             self.config.write(configfile)
 
         self.get_config_data()
