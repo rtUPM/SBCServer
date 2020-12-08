@@ -22,7 +22,7 @@ client.username_pw_set(ACCESS_TOKEN)
 # Connect to ThingsBoard using default MQTT port and 60 seconds keepalive interval
 client.connect(SERVER, 1883, 60)
 
-data = subprocess.run(['./getSensorData.sh'], stdout=subprocess.PIPE).stdout.decode().rstrip()
+data = subprocess.run(['/home/pi/SBCServer/scripts/getSensorData.sh'], stdout=subprocess.PIPE).stdout.decode().rstrip()
 temperature, humidity, heater, humidifier = data.split()
 print("Temperature: %s, Humidity: %s Heater: %s Humidifier: %s" % (temperature, humidity, heater, humidifier))
 sensor_data['temperature'] = temperature
