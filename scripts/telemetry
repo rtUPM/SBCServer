@@ -1,0 +1,1 @@
+*/1 * * * * pi cd /home/pi/SBCServer/scripts/ && ./telemetry.py
