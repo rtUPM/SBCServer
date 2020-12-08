@@ -18,6 +18,7 @@ sudo systemctl start vncserver-x11-serviced.service
 cd $DIR; git clone https://github.com/rtUPM/SBCServer
 chmod u+x SBCServer/sbc.py
 chmod u+x SBCServer/scripts/*
+sudo mv SBCServer/scripts/telemetry /etc/cron.d/
 
 #Change hostname
 sudo sed -i 's/raspberrypi/SBCServer/' /etc/hosts
