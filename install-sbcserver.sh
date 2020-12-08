@@ -29,6 +29,9 @@ sudo sed -i 's/raspberrypi/SBCServer/' /etc/hostname
 #Add sensor ip to /etc/hosts
 sudo sed -i -e '$a'"${SBCSensorIP}"'  SBCSensor' /etc/hosts
 
+#Generate ssh certificates
+cat /dev/zero | ssh-keygen -q -N ""
+
 #Add $DISPLAY environment variable 
 echo "DISPLAY=:0.0" | sudo tee -a  /etc/environment
 
