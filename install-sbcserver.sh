@@ -16,9 +16,11 @@ sudo systemctl start vncserver-x11-serviced.service
 
 #Install SBCServer
 cd $DIR; git clone https://github.com/rtUPM/SBCServer
+sudo mv SBCServer/scripts/telemetry /etc/cron.d/
+sudo chown root:root /etc/cron.d/telemetry
 chmod u+x SBCServer/sbc.py
 chmod u+x SBCServer/scripts/*
-sudo mv SBCServer/scripts/telemetry /etc/cron.d/
+
 
 #Change hostname
 sudo sed -i 's/raspberrypi/SBCServer/' /etc/hosts
