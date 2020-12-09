@@ -8,7 +8,6 @@ import subprocess
 
 SERVER = '127.0.0.1'
 ACCESS_TOKEN = ''
-# USER="pi"
 
 sensor_data = {'temperature': 0, 'humidity': 0, 'heater': 0, 'humidifier': 0}
 
