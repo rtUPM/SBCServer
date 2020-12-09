@@ -21,7 +21,6 @@ sudo chown root:root /etc/cron.d/telemetry
 chmod u+x SBCServer/sbc.py
 chmod u+x SBCServer/scripts/*
 
-
 #Change hostname
 sudo sed -i 's/raspberrypi/SBCServer/' /etc/hosts
 sudo sed -i 's/raspberrypi/SBCServer/' /etc/hostname
